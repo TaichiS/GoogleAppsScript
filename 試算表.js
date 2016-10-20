@@ -1,14 +1,17 @@
+
 /* 可以串接要執行的東西 */
 function onOpen() {
   
   // 如果這個功能是在 Google Docs 使用，則應該使用 DocumentApp.getUi()....
   SpreadsheetApp.getUi().createMenu('自定選單')
-  .addItem('彈出警告視窗', 'showAlert')  // showAlert
-  .addItem('彈出提示視窗', 'showPrompt')  // showPrompt
-  .addItem('彈出對話框', 'showDialog')   // showDialog
+  .addItem('彈出警告視窗', 'showAlert') 
+  .addItem('彈出提示視窗', 'showPrompt')  
+  .addItem('彈出對話框', 'showDialog')  
   .addSeparator()
-  .addItem('文件設定成「公開可編輯」', 'setOpen')   // setOpen
-  .addItem('文件設定成「不公開」', 'setPrivate')  // setPrivate
+  .addItem('文件設定成「公開可編輯」', 'setOpen')   
+  .addItem('文件設定成「不公開」', 'setPrivate') 
+  .addSeparator()
+  .addItem('寄信給我', 'sendMail')  
   .addToUi();
 }
 
@@ -62,12 +65,20 @@ function showDialog(){
   }
 }
 
+// 將本試算表設定成公開可編輯
 function setOpen(){
    myid = SpreadsheetApp.getActiveSpreadsheet().getId();
    DriveApp.getFileById(myid).setSharing(DriveApp.Access.ANYONE, DriveApp.Permission.EDIT);
 }
 
+// 將本試算表設定成私人，其他人無讀取權限
 function setPrivate(){
    myid = SpreadsheetApp.getActiveSpreadsheet().getId();
    DriveApp.getFileById(myid).setSharing(DriveApp.Access.PRIVATE, DriveApp.Permission.NONE);
 }  
+
+// 簡單的寄信範例
+function sendMail(){
+   MailApp.sendEmail("taichis@shsh.ylc.edu.tw", "這是從GoogleAppsScript寄來的信件", "這是信件內文");
+}
+
