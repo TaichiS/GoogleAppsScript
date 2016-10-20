@@ -1,6 +1,3 @@
-function myFunction() {
-}
-
 /* 可以串接要執行的東西 */
 function onOpen() {
   
